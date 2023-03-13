@@ -9,7 +9,7 @@ option(WITH_GTEST "Whether to build Google test" ON)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-configure_file(include/version.h.in version.h)
+configure_file(version.h.in version.h)
 
 add_executable(${PROJECT_NAME} main.cpp)
 add_library(tools tools.cpp)
