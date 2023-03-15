@@ -154,6 +154,33 @@ TEST_F(test_class, test_filter_46)
         EXPECT_TRUE(filtered_ip.at(i) == filter_sample.at(i));
 }
 
+TEST_F(test_class, test_init)
+{
+    Ip ip {};
+
+    ASSERT_NO_THROW(
+        ip.initialize(tools::split("70.46.0.0", '.'))
+    );
+}
+
+TEST_F(test_class, test_init_extra_octet)
+{
+    Ip ip {};
+
+    ASSERT_THROW(
+        ip.initialize(tools::split("70.46.0.0.1", '.')), std::invalid_argument
+    );
+}
+
+TEST_F(test_class, test_init_big_octet)
+{
+    Ip ip {};
+
+    ASSERT_THROW(
+        ip.initialize(tools::split("300.400.500.600", '.')), std::invalid_argument
+    );
+}
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
